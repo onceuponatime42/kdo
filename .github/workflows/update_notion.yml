@@ -1,0 +1,26 @@
+name: Mise à jour redirection Notion
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # tous les jours à minuit UTC (donc 2h du matin en France l'été)
+  workflow_dispatch:
+
+jobs:
+  update-redirect:
+    runs-on: ubuntu-latest
+    env:
+      NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      DATABASE_ID: ${{ secrets.DATABASE_ID }}
+      TOKEN: ${{ secrets.TOKEN }}
+      REPO: ${{ secrets.REPO }}
+      FICHIER: ${{ secrets.FICHIER }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install requirements
+        run: pip install notion-client requests
+      - name: Run script
+        run: python notion_update_html.py
