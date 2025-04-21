@@ -30,7 +30,7 @@ def get_pages(database_id):
 def get_notion_url(page_name, page_id):
     # Notion URLs are constructed as https://www.notion.so/{page_id_without_dashes}
     page_id_no_dash = page_id.replace("-", "")
-    return f"https://www.notion.so/{page_name.replace(" ", "-")}-{page_id_no_dash}"
+    return f"https://www.notion.so/{page_name.replace(' ', '-')}-{page_id_no_dash}"
 
 def find_page_by_today_date(pages):
     today = datetime.today()
